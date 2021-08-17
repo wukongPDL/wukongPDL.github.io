@@ -17,6 +17,7 @@ html{
 body{
 	 
 }
+
 .temp{
 	background: #000000;
 }
@@ -34,7 +35,7 @@ aside{
 	bottom: 0.625rem;
 	left: 0.625rem;
 	position: fixed;
-	background-color:hsla(0,0%,100%,.2); 
+	background-color:hsla(0,0%,100%,.1); 
 	z-index: 50;
 }
 #content{
@@ -282,8 +283,8 @@ ul li{
 }
 #archives h1{
 	padding-top:1.875rem;
-	font-size: 2.5rem;
-	font-family: 'Press Start 2P', cursive;
+	font-size: 3.5rem;
+	font-family: 'PressStart2P';
 	outline: none;
 	cursor: pointer; 
 	letter-spacing: 0.2rem;
@@ -802,4 +803,11 @@ ul li{
 	#content{
 		padding-left: 0;
 	}
+}
+
+
+/* 字体 */
+@font-face {
+    font-family: "PressStart2P";        //自定义字体名称
+	src: url(../lib/PressStart2P-Regular.ttf);//字体包路径
 }
