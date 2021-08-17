@@ -1,0 +1,22 @@
+<h1 id="Contributing"><a href="#Contributing" class="headerlink" title="Contributing"></a>Contributing</h1><p>For running the tests, you will need:</p>
+<ul>
+<li>Ruby 1.9.3+ with Bundler</li>
+<li>PhantomJS (for headless testing)</li>
+</ul>
+<p>First run bootstrap to ensure necessary dependencies:</p>
+<pre><code>$ script/bootstrap
+</code></pre>
+<p>Then run headless tests in the console:</p>
+<pre><code>$ script/test [&lt;test-file&gt;]
+</code></pre>
+<p>To run tests in other browsers, start a server:</p>
+<pre><code>$ script/server
+# now open http://localhost:4567/
+</code></pre>
+<h2 id="Test-structure"><a href="#Test-structure" class="headerlink" title="Test structure"></a>Test structure</h2><p>There are 3 main test modules:</p>
+<ul>
+<li><code>test/unit/fn_pjax.js</code> - Primarily tests the <code>$.fn.pjax</code> method and its options</li>
+<li><code>test/unit/pjax.js</code> - Main comprehensive pjax functionality tests</li>
+<li><code>test/unit/pjax_fallback.js</code> - Tests that verify same result after navigation<br>even if pjax is disabled (like for browsers that don’t support pushState).</li>
+</ul>
+<p>Each test drives a hidden test page in an <code>&lt;iframe&gt;</code>. See other tests to see how<br>they trigger pjax by using the <code>frame</code> reference and remember to do so as well.</p>

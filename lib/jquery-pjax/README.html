@@ -1,0 +1,285 @@
+<h1 id="pjax-pushState-ajax"><a href="#pjax-pushState-ajax" class="headerlink" title="pjax = pushState + ajax"></a>pjax = pushState + ajax</h1><p>pjax is a jQuery plugin that uses ajax and pushState to deliver a fast browsing experience with real permalinks, page titles, and a working back button.</p>
+<p>pjax works by fetching HTML from your server via ajax and replacing the content<br>of a container element on your page with the loaded HTML. It then updates the<br>current URL in the browser using pushState. This results in faster page<br>navigation for two reasons:</p>
+<ul>
+<li>No page resources (JS, CSS) get re-executed or re-applied;</li>
+<li>If the server is configured for pjax, it can render only partial page<br>contents and thus avoid the potentially costly full layout render.</li>
+</ul>
+<h3 id="Status-of-this-project"><a href="#Status-of-this-project" class="headerlink" title="Status of this project"></a>Status of this project</h3><p>jquery-pjax is <strong>largely unmaintained</strong> at this point. It might continue to<br>receive important bug fixes, but <em>its feature set is frozen</em> and it’s unlikely<br>that it will get new features or enhancements.</p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>pjax depends on jQuery 1.8 or higher.</p>
+<h3 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h3><pre><code>$ npm install jquery-pjax
+</code></pre>
+<h3 id="standalone-script"><a href="#standalone-script" class="headerlink" title="standalone script"></a>standalone script</h3><p>Download and include <code>jquery.pjax.js</code> in your web page:</p>
+<pre><code>curl -LO https://raw.github.com/defunkt/jquery-pjax/master/jquery.pjax.js
+</code></pre>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><h3 id="fn-pjax"><a href="#fn-pjax" class="headerlink" title="$.fn.pjax"></a><code>$.fn.pjax</code></h3><p>The simplest and most common use of pjax looks like this:</p>
+<pre><code class="javascript">$(document).pjax(&#39;a&#39;, &#39;#pjax-container&#39;)
+</code></pre>
+<p>This will enable pjax on all links on the page and designate the container as <code>#pjax-container</code>.</p>
+<p>If you are migrating an existing site, you probably don’t want to enable pjax<br>everywhere just yet. Instead of using a global selector like <code>a</code>, try annotating<br>pjaxable links with <code>data-pjax</code>, then use <code>&#39;a[data-pjax]&#39;</code> as your selector. Or,<br>try this selector that matches any <code>&lt;a data-pjax href=&gt;</code> links inside a <code>&lt;div data-pjax&gt;</code> container:</p>
+<pre><code class="javascript">$(document).pjax(&#39;[data-pjax] a, a[data-pjax]&#39;, &#39;#pjax-container&#39;)
+</code></pre>
+<h4 id="Server-side-configuration"><a href="#Server-side-configuration" class="headerlink" title="Server-side configuration"></a>Server-side configuration</h4><p>Ideally, your server should detect pjax requests by looking at the special<br><code>X-PJAX</code> HTTP header, and render only the HTML meant to replace the contents of<br>the container element (<code>#pjax-container</code> in our example) without the rest of<br>the page layout. Here is an example of how this might be done in Ruby on Rails:</p>
+<pre><code class="ruby">def index
+  if request.headers[&#39;X-PJAX&#39;]
+    render :layout =&gt; false
+  end
+end
+</code></pre>
+<p>If you’d like a more automatic solution than pjax for Rails check out <a href="https://github.com/rails/turbolinks">Turbolinks</a>.</p>
+<p><a href="https://gist.github.com/4283721">Check if there is a pjax plugin</a> for your favorite server framework.</p>
+<p>Also check out <a href="http://railscasts.com/episodes/294-playing-with-pjax">RailsCasts #294: Playing with PJAX</a>.</p>
+<h4 id="Arguments"><a href="#Arguments" class="headerlink" title="Arguments"></a>Arguments</h4><p>The synopsis for the <code>$.fn.pjax</code> function is:</p>
+<pre><code class="javascript">$(document).pjax(selector, [container], options)
+</code></pre>
+<ol>
+<li><code>selector</code> is a string to be used for click <a href="http://api.jquery.com/on/">event delegation</a>.</li>
+<li><code>container</code> is a string selector that uniquely identifies the pjax container.</li>
+<li><code>options</code> is an object with keys described below.</li>
+</ol>
+<h5 id="pjax-options"><a href="#pjax-options" class="headerlink" title="pjax options"></a>pjax options</h5><table>
+<thead>
+<tr>
+<th>key</th>
+<th>default</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>timeout</code></td>
+<td>650</td>
+<td>ajax timeout in milliseconds after which a full refresh is forced</td>
+</tr>
+<tr>
+<td><code>push</code></td>
+<td>true</td>
+<td>use <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history#Adding_and_modifying_history_entries">pushState</a> to add a browser history entry upon navigation</td>
+</tr>
+<tr>
+<td><code>replace</code></td>
+<td>false</td>
+<td>replace URL without adding browser history entry</td>
+</tr>
+<tr>
+<td><code>maxCacheLength</code></td>
+<td>20</td>
+<td>maximum cache size for previous container contents</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td></td>
+<td>a string or function returning the current pjax version</td>
+</tr>
+<tr>
+<td><code>scrollTo</code></td>
+<td>0</td>
+<td>vertical position to scroll to after navigation. To avoid changing scroll position, pass <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>&quot;GET&quot;</code></td>
+<td>see <a href="http://api.jquery.com/jQuery.ajax/">$.ajax</a></td>
+</tr>
+<tr>
+<td><code>dataType</code></td>
+<td><code>&quot;html&quot;</code></td>
+<td>see <a href="http://api.jquery.com/jQuery.ajax/">$.ajax</a></td>
+</tr>
+<tr>
+<td><code>container</code></td>
+<td></td>
+<td>CSS selector for the element where content should be replaced</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>link.href</td>
+<td>a string or function that returns the URL for the ajax request</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>link</td>
+<td>eventually the <code>relatedTarget</code> value for <a href="#events">pjax events</a></td>
+</tr>
+<tr>
+<td><code>fragment</code></td>
+<td></td>
+<td>CSS selector for the fragment to extract from ajax response</td>
+</tr>
+</tbody></table>
+<p>You can change the defaults globally by writing to the <code>$.pjax.defaults</code> object:</p>
+<pre><code class="javascript">$.pjax.defaults.timeout = 1200
+</code></pre>
+<h3 id="pjax-click"><a href="#pjax-click" class="headerlink" title="$.pjax.click"></a><code>$.pjax.click</code></h3><p>This is a lower level function used by <code>$.fn.pjax</code> itself. It allows you to get a little more control over the pjax event handling.</p>
+<p>This example uses the current click context to set an ancestor element as the container:</p>
+<pre><code class="javascript">if ($.support.pjax) {
+  $(document).on(&#39;click&#39;, &#39;a[data-pjax]&#39;, function(event) {
+    var container = $(this).closest(&#39;[data-pjax-container]&#39;)
+    var containerSelector = &#39;#&#39; + container.id
+    $.pjax.click(event, {container: containerSelector})
+  })
+}
+</code></pre>
+<p><strong>NOTE</strong> Use the explicit <code>$.support.pjax</code> guard. We aren’t using <code>$.fn.pjax</code> so we should avoid binding this event handler unless the browser is actually going to use pjax.</p>
+<h3 id="pjax-submit"><a href="#pjax-submit" class="headerlink" title="$.pjax.submit"></a><code>$.pjax.submit</code></h3><p>Submits a form via pjax.</p>
+<pre><code class="javascript">$(document).on(&#39;submit&#39;, &#39;form[data-pjax]&#39;, function(event) {
+  $.pjax.submit(event, &#39;#pjax-container&#39;)
+})
+</code></pre>
+<h3 id="pjax-reload"><a href="#pjax-reload" class="headerlink" title="$.pjax.reload"></a><code>$.pjax.reload</code></h3><p>Initiates a request for the current URL to the server using pjax mechanism and replaces the container with the response. Does not add a browser history entry.</p>
+<pre><code class="javascript">$.pjax.reload(&#39;#pjax-container&#39;, options)
+</code></pre>
+<h3 id="pjax"><a href="#pjax" class="headerlink" title="$.pjax"></a><code>$.pjax</code></h3><p>Manual pjax invocation. Used mainly when you want to start a pjax request in a handler that didn’t originate from a click. If you can get access to a click <code>event</code>, consider <code>$.pjax.click(event)</code> instead.</p>
+<pre><code class="javascript">function applyFilters() {
+  var url = urlForFilters()
+  $.pjax({url: url, container: &#39;#pjax-container&#39;})
+}
+</code></pre>
+<h2 id="Events"><a href="#Events" class="headerlink" title="Events"></a>Events</h2><p>All pjax events except <code>pjax:click</code> &amp; <code>pjax:clicked</code> are fired from the pjax<br>container element.</p>
+<table>
+<tr>
+  <th>event</th>
+  <th>cancel</th>
+  <th>arguments</th>
+  <th>notes</th>
+</tr>
+<tr>
+  <th colspan=4>event lifecycle upon following a pjaxed link</th>
+</tr>
+<tr>
+  <td><code>pjax:click</code></td>
+  <td>✔︎</td>
+  <td><code>options</code></td>
+  <td>fires from a link that got activated; cancel to prevent pjax</td>
+</tr>
+<tr>
+  <td><code>pjax:beforeSend</code></td>
+  <td>✔︎</td>
+  <td><code>xhr, options</code></td>
+  <td>can set XHR headers</td>
+</tr>
+<tr>
+  <td><code>pjax:start</code></td>
+  <td></td>
+  <td><code>xhr, options</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>pjax:send</code></td>
+  <td></td>
+  <td><code>xhr, options</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>pjax:clicked</code></td>
+  <td></td>
+  <td><code>options</code></td>
+  <td>fires after pjax has started from a link that got clicked</td>
+</tr>
+<tr>
+  <td><code>pjax:beforeReplace</code></td>
+  <td></td>
+  <td><code>contents, options</code></td>
+  <td>before replacing HTML with content loaded from the server</td>
+</tr>
+<tr>
+  <td><code>pjax:success</code></td>
+  <td></td>
+  <td><code>data, status, xhr, options</code></td>
+  <td>after replacing HTML content loaded from the server</td>
+</tr>
+<tr>
+  <td><code>pjax:timeout</code></td>
+  <td>✔︎</td>
+  <td><code>xhr, options</code></td>
+  <td>fires after <code>options.timeout</code>; will hard refresh unless canceled</td>
+</tr>
+<tr>
+  <td><code>pjax:error</code></td>
+  <td>✔︎</td>
+  <td><code>xhr, textStatus, error, options</code></td>
+  <td>on ajax error; will hard refresh unless canceled</td>
+</tr>
+<tr>
+  <td><code>pjax:complete</code></td>
+  <td></td>
+  <td><code>xhr, textStatus, options</code></td>
+  <td>always fires after ajax, regardless of result</td>
+</tr>
+<tr>
+  <td><code>pjax:end</code></td>
+  <td></td>
+  <td><code>xhr, options</code></td>
+  <td></td>
+</tr>
+<tr>
+  <th colspan=4>event lifecycle on browser Back/Forward navigation</th>
+</tr>
+<tr>
+  <td><code>pjax:popstate</code></td>
+  <td></td>
+  <td></td>
+  <td>event <code>direction</code> property: &quot;back&quot;/&quot;forward&quot;</td>
+</tr>
+<tr>
+  <td><code>pjax:start</code></td>
+  <td></td>
+  <td><code>null, options</code></td>
+  <td>before replacing content</td>
+</tr>
+<tr>
+  <td><code>pjax:beforeReplace</code></td>
+  <td></td>
+  <td><code>contents, options</code></td>
+  <td>right before replacing HTML with content from cache</td>
+</tr>
+<tr>
+  <td><code>pjax:end</code></td>
+  <td></td>
+  <td><code>null, options</code></td>
+  <td>after replacing content</td>
+</tr>
+</table>
+
+<p><code>pjax:send</code> &amp; <code>pjax:complete</code> are a good pair of events to use if you are implementing a<br>loading indicator. They’ll only be triggered if an actual XHR request is made,<br>not if the content is loaded from cache:</p>
+<pre><code class="javascript">$(document).on(&#39;pjax:send&#39;, function() {
+  $(&#39;#loading&#39;).show()
+})
+$(document).on(&#39;pjax:complete&#39;, function() {
+  $(&#39;#loading&#39;).hide()
+})
+</code></pre>
+<p>An example of canceling a <code>pjax:timeout</code> event would be to disable the fallback<br>timeout behavior if a spinner is being shown:</p>
+<pre><code class="javascript">$(document).on(&#39;pjax:timeout&#39;, function(event) {
+  // Prevent default timeout redirection behavior
+  event.preventDefault()
+})
+</code></pre>
+<h2 id="Advanced-configuration"><a href="#Advanced-configuration" class="headerlink" title="Advanced configuration"></a>Advanced configuration</h2><h3 id="Reinitializing-plugins-widget-on-new-page-content"><a href="#Reinitializing-plugins-widget-on-new-page-content" class="headerlink" title="Reinitializing plugins/widget on new page content"></a>Reinitializing plugins/widget on new page content</h3><p>The whole point of pjax is that it fetches and inserts new content <em>without</em><br>refreshing the page. However, other jQuery plugins or libraries that are set to<br>react on page loaded event (such as <code>DOMContentLoaded</code>) will not pick up on<br>these changes. Therefore, it’s usually a good idea to configure these plugins to<br>reinitialize in the scope of the updated page content. This can be done like so:</p>
+<pre><code class="js">$(document).on(&#39;ready pjax:end&#39;, function(event) {
+  $(event.target).initializeMyPlugin()
+})
+</code></pre>
+<p>This will make <code>$.fn.initializeMyPlugin()</code> be called at the document level on<br>normal page load, and on the container level after any pjax navigation (either<br>after clicking on a link or going Back in the browser).</p>
+<h3 id="Response-types-that-force-a-reload"><a href="#Response-types-that-force-a-reload" class="headerlink" title="Response types that force a reload"></a>Response types that force a reload</h3><p>By default, pjax will force a full reload of the page if it receives one of the<br>following responses from the server:</p>
+<ul>
+<li><p>Page content that includes <code>&lt;html&gt;</code> when <code>fragment</code> selector wasn’t explicitly<br>configured. Pjax presumes that the server’s response hasn’t been properly<br>configured for pjax. If <code>fragment</code> pjax option is given, pjax will extract the<br>content based on that selector.</p>
+</li>
+<li><p>Page content that is blank. Pjax assumes that the server is unable to deliver<br>proper pjax contents.</p>
+</li>
+<li><p>HTTP response code that is 4xx or 5xx, indicating some server error.</p>
+</li>
+</ul>
+<h3 id="Affecting-the-browser-URL"><a href="#Affecting-the-browser-URL" class="headerlink" title="Affecting the browser URL"></a>Affecting the browser URL</h3><p>If the server needs to affect the URL which will appear in the browser URL after<br>pjax navigation (like HTTP redirects work for normal requests), it can set the<br><code>X-PJAX-URL</code> header:</p>
+<pre><code class="ruby">def index
+  request.headers[&#39;X-PJAX-URL&#39;] = &quot;http://example.com/hello&quot;
+end
+</code></pre>
+<h3 id="Layout-Reloading"><a href="#Layout-Reloading" class="headerlink" title="Layout Reloading"></a>Layout Reloading</h3><p>Layouts can be forced to do a hard reload when assets or html changes.</p>
+<p>First set the initial layout version in your header with a custom meta tag.</p>
+<pre><code class="html">&lt;meta http-equiv=&quot;x-pjax-version&quot; content=&quot;v123&quot;&gt;
+</code></pre>
+<p>Then from the server side, set the <code>X-PJAX-Version</code> header to the same.</p>
+<pre><code class="ruby">if request.headers[&#39;X-PJAX&#39;]
+  response.headers[&#39;X-PJAX-Version&#39;] = &quot;v123&quot;
+end
+</code></pre>
+<p>Deploying a deploy, bumping the version constant to force clients to do a full reload the next request getting the new layout and assets.</p>
