@@ -89,7 +89,7 @@ $(document).ready(function () {
 	//pjax局部刷新
 	function pjaxload(){
 
-		$(document).pjax('#widget a,#archives a,#articleList a','#content', {fragment:'#content', timeout:8000});
+		$(document).pjax('.widget a,#archives a,#articleList a','#content', {fragment:'#content', timeout:8000});
 
 		$(document).on('pjax:start', function() { NProgress.start(); });
 		$(document).on('pjax:end',   function() { NProgress.done();  });

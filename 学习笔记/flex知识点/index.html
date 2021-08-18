@@ -4,8 +4,8 @@
 	<!-- 在配置文档中读取标题-->
 	<title>
 		
-		flex知识点-
-		
+		flex知识点
+		 
 		PDL`s blog
 	</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -38,16 +38,16 @@
 	<link rel=”shortcut icon” href="/img/webicon.ico" mce_href="/img/webicon.ico" type=”image/x-icon”>
 	<!-- live2D -->
 	<!-- <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script> -->
+	
+	
 
 <meta name="generator" content="Hexo 5.4.0"></head>
 <body>
 	<div id="main">
-		
 		<aside>
 			<!-- 侧边信息栏 -->
-
-<div id="infoShow">
-	<div id="photo">
+<div class="infoShow">
+	<div class="photo">
 		<div class="mask"></div>
 		<iframe src="/img/dragon.svg"  ></iframe>
 		<iframe src="/img/dragon (2).svg" style="display:none" ></iframe>
@@ -57,25 +57,25 @@
 		<div class="statistics-item">点击数</div>
 		<div class="statistics-item">访问量</div>
 	</div>	 -->
-	<div id="siteTitle"><h1>PDL`s blog</h1></div>
+	<div class="siteTitle"><h1>PDL`s blog</h1></div>
 	
-	<div id="widget">
+	<div class="widget">
 		
-          <div class="widgetItems">
+          <div class="widgetItems" id="navHome">
 	<a href="/">HOME</a>
 </div>
 
           
-<div class="widgetItems">
+<div class="widgetItems" id='navCategory'>
   <a id="showCategories" href=""> Category </a>
   <div class="show">
-	<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
+	<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E4%B8%BB%E9%A2%98%E5%BC%80%E5%8F%91/">hexo主题开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9%E5%90%88%E9%9B%86/">知识点合集</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E6%89%8B%E8%AE%B0%E5%BD%95/">随手记录</a></li></ul>
   </div> 
 </div>
  
 
 
-          <div class="widgetItems">
+          <div class="widgetItems " id="navArchives">
 	<a href="/archives"> Archive</a>
 </div>
 
@@ -87,7 +87,7 @@
 		<div class="widgetItems"><a href=""><i class="fa fa-navicon fa-fw"></i> 分类 </a></div>
 		<div class="widgetItems"><a href=""><i class="fa fa-calendar"></i> 归档</a></div> -->
 	</div>
-	<div id="linksList">
+	<div class="linksList">
 		<ul>
 			<!-- 内部链接本页面直接跳转 -->
 			
@@ -129,15 +129,15 @@
 			<div id="article">
 	<div id=info>
 		<span >作者：PDL</span><br>
-		<span>日期：2021-08-11 11:24:16</span><br>
-		<span id="busuanzi_container_page_pv" >
-		  浏览量：<span id="busuanzi_value_page_pv"></span> 
+		<span>日期：2021-07-11 11:24:16</span><br>
+		<span id="busuanzi_container_page_pv"  >
+		  浏览量：<span id="busuanzi_value_page_pv"> </span> 
 	</div>
 	
 	<div id="tocList">
 		<div id="contentList">
 			<p>文章目录</p>
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#flex%E5%B8%83%E5%B1%80%E7%88%B6%E9%A1%B9%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7"><span class="toc-text">flex布局父项常见属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#flex-direction%E4%B8%BB%E8%BD%B4%E6%96%B9%E5%90%91"><span class="toc-text">flex-direction主轴方向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#justif-content%E4%B8%BB%E8%BD%B4%E4%B8%8A%E7%9A%84%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-text">justif-content主轴上的对齐方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flex-wrap%E6%98%AF%E5%90%A6%E6%8D%A2%E8%A1%8C"><span class="toc-text">flex-wrap是否换行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#align-items%EF%BC%88%E5%8D%95%E8%A1%8C%EF%BC%89%E4%BE%A7%E8%BD%B4%E4%B8%8A%E7%9A%84%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-text">align-items（单行）侧轴上的对齐方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#align-content-%E5%A4%9A%E8%A1%8C-%E4%BE%A7%E8%BD%B4%E4%B8%8A%E7%9A%84%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-text">align-content(多行) 侧轴上的对齐方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flex-flow-%E5%A4%8D%E5%90%88%E5%B1%9E%E6%80%A7"><span class="toc-text">flex-flow 复合属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#flex%E5%B8%83%E5%B1%80%E5%AD%90%E9%A1%B9%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7"><span class="toc-text">flex布局子项常见属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#flex%E5%B1%9E%E6%80%A7-%E9%87%8D%E8%A6%81"><span class="toc-text">flex属性(重要)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#align-self-%E8%AE%BE%E7%BD%AE%E5%8D%95%E4%B8%AA%E5%AD%90%E5%85%83%E7%B4%A0%E7%9A%84%E5%AF%B9%E9%BD%90"><span class="toc-text">align-self 设置单个子元素的对齐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#order%E6%8E%A7%E5%88%B6%E5%8D%95%E4%B8%AA%E5%AD%90%E5%85%83%E7%B4%A0%E6%8E%92%E5%BA%8F"><span class="toc-text">order控制单个子元素排序</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#flex%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-text">flex知识点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#flex%E5%B8%83%E5%B1%80%E7%88%B6%E9%A1%B9%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7"><span class="toc-text">flex布局父项常见属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#flex-direction%E4%B8%BB%E8%BD%B4%E6%96%B9%E5%90%91"><span class="toc-text">flex-direction主轴方向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#justif-content%E4%B8%BB%E8%BD%B4%E4%B8%8A%E7%9A%84%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-text">justif-content主轴上的对齐方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flex-wrap%E6%98%AF%E5%90%A6%E6%8D%A2%E8%A1%8C"><span class="toc-text">flex-wrap是否换行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#align-items%EF%BC%88%E5%8D%95%E8%A1%8C%EF%BC%89%E4%BE%A7%E8%BD%B4%E4%B8%8A%E7%9A%84%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-text">align-items（单行）侧轴上的对齐方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#align-content-%E5%A4%9A%E8%A1%8C-%E4%BE%A7%E8%BD%B4%E4%B8%8A%E7%9A%84%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-text">align-content(多行) 侧轴上的对齐方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flex-flow-%E5%A4%8D%E5%90%88%E5%B1%9E%E6%80%A7"><span class="toc-text">flex-flow 复合属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#flex%E5%B8%83%E5%B1%80%E5%AD%90%E9%A1%B9%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7"><span class="toc-text">flex布局子项常见属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#flex%E5%B1%9E%E6%80%A7-%E9%87%8D%E8%A6%81"><span class="toc-text">flex属性(重要)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#align-self-%E8%AE%BE%E7%BD%AE%E5%8D%95%E4%B8%AA%E5%AD%90%E5%85%83%E7%B4%A0%E7%9A%84%E5%AF%B9%E9%BD%90"><span class="toc-text">align-self 设置单个子元素的对齐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#order%E6%8E%A7%E5%88%B6%E5%8D%95%E4%B8%AA%E5%AD%90%E5%85%83%E7%B4%A0%E6%8E%92%E5%BA%8F"><span class="toc-text">order控制单个子元素排序</span></a></li></ol></li></ol>
 		</div>
 		<div id="listSwitch">
 			
@@ -145,7 +145,7 @@
 	</div>
 	<div id="postContent">
 		<h1>flex知识点</h1>
-		<p>使用flex布局第一步需要先设置父元素为flex布局 <strong>display:flex</strong></p>
+		<h1 id="flex知识点"><a href="#flex知识点" class="headerlink" title="flex知识点"></a>flex知识点</h1><p>使用flex布局第一步需要先设置父元素为flex布局 <strong>display:flex</strong></p>
 <ol>
 <li><p><strong>flex布局父项常见属性</strong>：</p>
 <table>
@@ -417,7 +417,7 @@ flex-flow:conlumn wrap;
 
 	
 	<!-- 不蒜子统计 -->
-	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	<script  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 	
 	<!--引入js文件-->
 	
